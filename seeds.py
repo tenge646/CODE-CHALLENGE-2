@@ -15,3 +15,8 @@ fake = Faker()
 for _ in range(4):
     restaurant = Restaurant(name=fake.company(), price=fake.random_int(1, 5))
     session.add(restaurant)
+
+# Create random customers
+for _ in range(10):
+    customer = Customer(first_name=fake.first_name(), last_name=fake.last_name())
+    session.add(customer)    
