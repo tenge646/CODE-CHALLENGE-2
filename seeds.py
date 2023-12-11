@@ -10,3 +10,8 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 fake = Faker()
+
+# Create random restaurants
+for _ in range(4):
+    restaurant = Restaurant(name=fake.company(), price=fake.random_int(1, 5))
+    session.add(restaurant)
