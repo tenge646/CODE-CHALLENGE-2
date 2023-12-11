@@ -1,7 +1,12 @@
+import logging
 from faker import Faker
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, Restaurant, Customer, Review
+
+# Suppress SQLAlchemy warnings
+logging.basicConfig()
+logging.getLogger('sqlalchemy').setLevel(logging.ERROR)
 
 # Create an SQLite database in memory
 engine = create_engine('sqlite:///database.sqlite')
@@ -19,7 +24,7 @@ for _ in range(4):
 # Create random customers
 for _ in range(10):
     customer = Customer(first_name=fake.first_name(), last_name=fake.last_name())
-    session.add(customer)    
+    session.add(customer)
 
 # Link customers and restaurants with random reviews
 restaurants = session.query(Restaurant).all()
