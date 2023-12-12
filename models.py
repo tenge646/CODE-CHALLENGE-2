@@ -12,7 +12,7 @@ class Restaurant(Base):
     price = Column(Integer)
 
     reviews = relationship('Review', back_populates='restaurant')
-    customers = relationship('Customer', secondary='reviews', back_populates='restaurants')
+    customers = relationship('Customer', secondary='reviews', back_populates='restaurants', overlaps="reviews")
 
 class Customer(Base):
     __tablename__ = 'customers'
@@ -22,7 +22,7 @@ class Customer(Base):
     last_name = Column(String)
 
     reviews = relationship('Review', back_populates='customer')
-    restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers')
+    restaurants = relationship('Restaurant', secondary='reviews', back_populates='customers', overlaps="reviews")
 
 class Review(Base):
     __tablename__ = 'reviews'
